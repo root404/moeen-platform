@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "تطبيق ويب حفظ وتقييم القرآن الكريم بالذكاء الاصطناعي",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "npm run build:frontend",
     "start": "npm run dev:frontend",
