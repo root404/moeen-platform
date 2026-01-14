@@ -7,7 +7,9 @@ import { APIService } from '@/services/api';
 
 interface LeaderboardEntry {
   userId: string;
-  userName: string;
+  userName?: string;
+  firstName?: string;
+  lastName?: string;
   profileImage?: string;
   totalRepetitions: number;
   totalSessions: number;
@@ -43,7 +45,7 @@ export default function LeaderboardPage() {
     try {
       const userResponse = await APIService.getProfile();
       if (userResponse.success) {
-        setCurrentUser(userResponse.data);
+        setCurrentUser(userResponse.data || null);
       }
     } catch (err) {
       console.error('Failed to fetch user data:', err);
@@ -52,18 +54,23 @@ export default function LeaderboardPage() {
 
   const fetchLeaderboardData = async () => {
     try {
-      const [quranResponse, istighfarResponse] = await Promise.all([
-        APIService.getLeaderboard({ type: 'quran', period: timeFilter }),
-        APIService.getLeaderboard({ type: 'istighfar', period: timeFilter })
-      ]);
+      // TODO: Implement leaderboard API endpoints
+      // const [quranResponse, istighfarResponse] = await Promise.all([
+      //   APIService.getLeaderboard({ type: 'quran', period: timeFilter }),
+      //   APIService.getLeaderboard({ type: 'istighfar', period: timeFilter })
+      // ]);
 
-      if (quranResponse.success) {
-        setQuranLeaderboard(quranResponse.data);
-      }
+      // if (quranResponse.success) {
+      //   setQuranLeaderboard(quranResponse.data);
+      // }
 
-      if (istighfarResponse.success) {
-        setIstighfarLeaderboard(istighfarResponse.data);
-      }
+      // if (istighfarResponse.success) {
+      //   setIstighfarLeaderboard(istighfarResponse.data);
+      // }
+      
+      // Set empty data for now
+      setQuranLeaderboard([]);
+      setIstighfarLeaderboard([]);
     } catch (err) {
       setError('فشل في تحميل بيانات لوحات المتصدرين');
     } finally {

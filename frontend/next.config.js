@@ -1,22 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable internationalization for Arabic
-  i18n: {
-    defaultLocale: 'ar',
-    locales: ['ar', 'en'],
-  },
-
-  // Enable App Router
-  experimental: {
-    appDir: true,
-  },
+  // TODO: Implement i18n for App Router when needed
+  // i18n is not supported in App Router - need to use next-intl or similar
   
   // React Strict Mode
   reactStrictMode: true,
   
   // Image optimization
   images: {
-    domains: ['fonts.googleapis.com', 'fonts.gstatic.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fonts.googleapis.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'fonts.gstatic.com',
+      },
+    ],
     formats: ['image/webp', 'image/avif'],
   },
 

@@ -22,10 +22,7 @@ api.interceptors.request.use(
     // Add JWT token if available
     const token = localStorage.getItem('accessToken');
     if (token) {
-      config.headers = {
-        ...config.headers,
-        Authorization: `Bearer ${token}`,
-      };
+      (config.headers as any)['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },

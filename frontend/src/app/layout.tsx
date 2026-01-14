@@ -1,6 +1,18 @@
 import './globals.css';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Cairo, Tajawal } from 'next/font/google';
+
+const cairoFont = Cairo({
+  subsets: ['arabic', 'latin'],
+  variable: '--font-cairo',
+});
+
+const tajawalFont = Tajawal({
+  subsets: ['arabic', 'latin'],
+  variable: '--font-tajawal',
+  weight: '400',
+});
 
 export default function RootLayout({
   children,

@@ -131,7 +131,8 @@ export default function AudioRecorder({
       let interimTranscript = '';
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const result = event.results[i];
+        const results = event.results as any;
+        const result = results[i];
         if (result.isFinal) {
           finalTranscript = result[0].transcript;
         } else {
@@ -211,8 +212,17 @@ export default function AudioRecorder({
           // Remove the data URL prefix
           const base64Audio = base64data.split(',')[1];
           
+          // Convert base64 back to Blob
+          const byteCharacters = atob(base64Audio);
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+          }
+          const byteArray = new Uint8Array(byteNumbers);
+          const audioBlob = new Blob([byteArray], { type: 'audio/webm' });
+          
           // Submit transcript and audio
-          onTranscriptComplete?.(transcript, base64Audio);
+          onTranscriptComplete?.(transcript, audioBlob);
           
           if (autoSubmit) {
             onRecordingComplete?.();

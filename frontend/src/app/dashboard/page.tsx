@@ -24,7 +24,7 @@ export default function DashboardPage() {
     const fetchSurahs = async () => {
       try {
         const response = await APIService.getSurahs({ limit: 114 });
-        if (response.success) {
+        if (response.success && response.data) {
           setSurahs(response.data.items);
         } else {
           setError('فشل في تحميل السور');

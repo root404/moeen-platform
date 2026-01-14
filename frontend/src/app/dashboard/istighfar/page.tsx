@@ -8,6 +8,7 @@ import { APIService } from '@/services/api';
 
 interface IstighfarSession {
   id: string;
+  userId: string;
   durationSeconds: number;
   countedRepetitions: number;
   targetRepetitions: number;
@@ -16,6 +17,9 @@ interface IstighfarSession {
   endTime?: Date;
   completionRate?: number;
   notes?: string;
+  metadata?: Record<string, any>;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export default function IstighfarPage() {

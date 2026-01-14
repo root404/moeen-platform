@@ -6,19 +6,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { APIService } from '@/services/api';
-
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone?: string;
-  country?: string;
-  subscriptionType: 'free' | 'basic' | 'premium' | 'admin';
-  profileImage?: string;
-  createdAt: string;
-  lastLogin?: string;
-}
+import { User } from '@/types';
 
 interface UserStats {
   totalMemorized: number;
@@ -51,26 +39,26 @@ export default function ProfilePage() {
 
   const fetchUserData = async () => {
     try {
-      const [userResponse, statsResponse] = await Promise.all([
-        APIService.getProfile(),
-        APIService.getUserStats()
-      ]);
+      const userResponse = await APIService.getProfile();
+      // TODO: Implement getUserStats API endpoint
+      // const statsResponse = await APIService.getUserStats();
 
       if (userResponse.success) {
-        setUser(userResponse.data);
+        setUser(userResponse.data || null);
         setFormData({
-          firstName: userResponse.data.firstName,
-          lastName: userResponse.data.lastName,
-          phone: userResponse.data.phone || '',
-          country: userResponse.data.country || ''
+          firstName: userResponse.data?.firstName || '',
+          lastName: userResponse.data?.lastName || '',
+          phone: userResponse.data?.phone || '',
+          country: userResponse.data?.country || ''
         });
       }
 
-      if (statsResponse.success) {
-        setStats(statsResponse.data);
-      }
+      // TODO: Set user stats when API is implemented
+      // if (statsResponse.success) {
+      //   setUserStats(statsResponse.data);
+      // }
     } catch (err) {
-      setError('فشل في تحميل بيانات الملف الشخصي');
+      setError('فشل في تحميل بيانات المستخدم');
     } finally {
       setLoading(false);
     }
@@ -100,14 +88,14 @@ export default function ProfilePage() {
       const response = await APIService.updateProfile(formData);
 
       if (response.success) {
-        setUser(response.data);
+        setUser(response.data || null);
         setIsEditing(false);
         
-        // Refresh stats after profile update
-        const statsResponse = await APIService.getUserStats();
-        if (statsResponse.success) {
-          setStats(statsResponse.data);
-        }
+        // TODO: Refresh stats after profile update when API is implemented
+        // const statsResponse = await APIService.getUserStats();
+        // if (statsResponse.success) {
+        //   setStats(statsResponse.data);
+        // }
       } else {
         setError('فشل في تحديث الملف الشخصي');
       }
@@ -144,10 +132,10 @@ export default function ProfilePage() {
           profileImage: base64Image
         });
 
-        if (response.success) {
+        if (response.success && response.data) {
           setUser(prev => ({
             ...prev!,
-            profileImage: response.data.profileImage
+            profileImage: response.data?.profileImage
           }));
         } else {
           setError('فشل في رفع الصورة');
@@ -376,7 +364,7 @@ export default function ProfilePage() {
                     <div className="flex justify-between items-center">
                       <span className="text-gray-500">تاريخ الإنضمام:</span>
                       <span className="font-medium text-gray-900">
-                        {user?.createdAt ? formatDate(user.createdAt) : ''}
+                        {user?.createdAt ? formatDate(user.createdAt.toISOString()) : ''}
                       </span>
                     </div>
                   </div>
