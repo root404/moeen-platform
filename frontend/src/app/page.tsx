@@ -1,8 +1,92 @@
-export default function Home() {
+'use client';
+
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import '../styles/globals.css';
+
+export default function HomePage() {
+  const router = useRouter();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-emerald-100">
+    <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+      <section className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">
+            مرحباً بكم في منصة مُعين
+          </h1>
+          <p className="text-xl text-gray-200 mb-8">
+            منصة متقدمة لحفظ وتقييم القرآن الكريم بالذكاء الاصطناعي
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="bg-white rounded-lg shadow-lg p-8 transform transition-transform hover:scale-105 duration-200">
+            <h2 className="text-2xl font-bold text-emerald-600 mb-4">
+              📖 التدريب على التلاوة
+            </h2>
+            <p className="text-gray-600 mb-6">
+              تدريب على تلاوة السور القرآنية مع تقييم فوري بالذكاء الاصطناعي
+            </p>
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => router.push('/register')}
+                className="bg-emerald-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-emerald-700 transition-colors duration-200 mr-4"
+              >
+                إنشاء حساب جديد
+              </button>
+              <button
+                onClick={() => router.push('/login')}
+                className="bg-white text-emerald-600 font-bold py-3 px-8 rounded-lg border-2 border-emerald-600 hover:bg-gray-50 transition-colors duration-200"
+              >
+                تسجيل الدخول
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-8 transform transition-transform hover:scale-105 duration-200">
+            <h2 className="text-2xl font-bold text-blue-600 mb-4">
+              🎙️ التقييم والاختبارات
+            </h2>
+            <p className="text-gray-600 mb-6">
+              اختبارات تحفيظ وامتحانات قصيرة مع ملاحظات أداء
+            </p>
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => router.push('/dashboard')}
+                className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+              >
+                لوحة التحكم
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-8 transform transition-transform hover:scale-105 duration-200">
+            <h2 className="text-2xl font-bold text-purple-600 mb-4">
+              🏆 لوحة المتسابقين
+            </h2>
+            <p className="text-gray-600 mb-6">
+              المتسابقون الأوائل في جميع المستويات
+            </p>
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => window.open('https://moeen-api.onrender.com/health', '_blank')}
+                className="bg-purple-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-purple-700 transition-colors duration-200"
+              >
+                حالة النظام
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-gray-500">
+            🎉 منصة مُعين - نسخة 2.0.0 - جميع الحقوق محفوظة © 2024
+          </p>
+        </div>
+      </section>
+    </main>
+  );
+}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
