@@ -27,6 +27,20 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'مرحباً بكم في منصة مُعين',
+    description: 'Welcome to مُعين Platform - Quran Memorization & Evaluation',
+    version: '2.0.0',
+    status: 'running',
+    endpoints: {
+      health: '/health',
+      api: '/api'
+    }
+  });
+});
+
 // API routes placeholder
 app.get('/api', (req, res) => {
   res.json({ 
