@@ -18,7 +18,7 @@ services:
           property: connectionString
       - key: JWT_SECRET
         generateValue: true
-      - key: GOOGLE_GEN_API_KEY
+      - key: GEMINI_API_KEY
         sync: false # ستدخله يدوياً في لوحة تحكم Render
       - key: NODE_ENV
         value: production
