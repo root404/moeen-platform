@@ -14,8 +14,6 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitReturns": false,
     "noImplicitThis": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "noStrictGenericChecks": true,
     "noLib": false,
     "noResolve": false,
     "isolatedModules": false
