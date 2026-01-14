@@ -93,6 +93,7 @@ export default function HomePage() {
               <h1 className="text-2xl font-bold text-emerald-700">مُعين</h1>
               <span className="mr-3 text-sm text-gray-500 hidden sm:inline">منصة حفظ وتقييم القرآن الكريم</span>
             </div>
+            <p className="text-sm text-gray-600">مرحباً بكم</p>
             <nav className="flex space-x-reverse space-x-4">
               <button className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors">
                 تسجيل الدخول
