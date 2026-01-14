@@ -58,7 +58,7 @@ export default function IstighfarPage() {
         sessionType
       });
       
-      if (response.success) {
+      if (response.success && response.data) {
         setSessions(response.data.items || []);
       } else {
         setError('فشل في تحميل جلسات الاستغفار');
