@@ -4,10 +4,10 @@
   "description": "تطبيق ويب حفظ وتقييم القرآن الكريم بالذكاء الاصطناعي",
   "private": true,
   "scripts": {
-    "build": "npm run build && npm run build:frontend",
+    "build": "npm run build:frontend",
     "start": "npm run dev:frontend",
     "dev": "concurrently \"npm run dev:frontend\"",
-    "build: "frontend": "npm run build:frontend",
+    "build:frontend": "next build",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },
