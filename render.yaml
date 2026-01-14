@@ -1,0 +1,58 @@
+services:
+  # ---------------------------------------------------
+  # 1. Backend Service (Node.js API)
+  # ---------------------------------------------------
+  - type: web
+    name: moeen-api
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: moeen-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GOOGLE_GEN_API_KEY
+        sync: false # ستدخله يدوياً في لوحة تحكم Render
+      - key: NODE_ENV
+        value: production
+
+  # ---------------------------------------------------
+  # 2. Frontend Service (Next.js)
+  # ---------------------------------------------------
+  - type: web
+    name: moeen-frontend
+    env: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: moeen-api
+          property: url
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        fromService:
+          type: web
+          name: moeen-frontend
+          property: url
+
+databases:
+  # ---------------------------------------------------
+  # 3. Database (PostgreSQL)
+  # ---------------------------------------------------
+  - name: moeen-db
+    databaseName: moeen_prod
+    user: moeen_user
+    plan: free
+    ipAllowList: [] # يسمح بالاتصال الداخلي فقط

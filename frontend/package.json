@@ -1,0 +1,38 @@
+{
+  "name": "مُعين Frontend",
+  "version": "2.0.0",
+  "description": "تطبيق ويب حفظ وتقييم القرآن الكريم بالذكاء الاصطناعي",
+  "private": true,
+  "scripts": {
+    "build": "npm run build && npm run build:frontend",
+    "start": "npm run dev:frontend",
+    "dev": "concurrently \"npm run dev:frontend\"",
+    "build: "frontend": "npm run build:frontend",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^14.2.15",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.6.8",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@tailwindcss/postcss": "^4.0.3",
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.1",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.0.0",
+    "prettier": "^3.0.0"
+  }
+}
