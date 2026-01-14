@@ -1,5 +1,5 @@
 import app from './app';
-import database from './config/database';
+import { database } from './config/database';
 import { logSystemEvent, testLogger } from './utils/logger';
 import environment from './config/environment';
 
