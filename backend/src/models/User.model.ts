@@ -1,5 +1,5 @@
 import { query, transaction } from '../config/database';
-import { User, UserCreateInput, UserUpdateInput, AuthRequest, APIError } from '../types';
+import { User, UserCreateInput, UserUpdateInput, AuthRequest } from '../types';
 import { NotFoundError, BadRequestError, ConflictError } from '../utils/errors';
 import { hashPassword, comparePassword, generateUUID } from '../utils/helpers';
 

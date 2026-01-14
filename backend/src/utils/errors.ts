@@ -1,5 +1,19 @@
 import { Response } from 'express';
-import { AuthRequest, APIError, ValidationError } from '../types';
+import { AuthRequest, ValidationError } from '../types';
+
+// Simple APIError class for deployment
+class APIError extends Error {
+  statusCode: number;
+  code: string;
+  details: any;
+
+  constructor(message: string, statusCode: number = 500, code: string = 'INTERNAL_ERROR', details?: any) {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+    this.details = details;
+  }
+}
 
 export class AppError extends APIError {
   constructor(message: string, statusCode: number = 500, code?: string, details?: any) {
