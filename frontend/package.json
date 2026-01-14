@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run build:frontend",
-    "start": "npm run dev:frontend",
+    "start": "next start",
     "dev": "concurrently \"npm run dev:frontend\"",
     "build:frontend": "next build",
     "lint": "next lint",
