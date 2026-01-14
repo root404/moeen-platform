@@ -1,7 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import environment from '../config/environment';
-import { AuthRequest, JWTPayload, APIError } from '../types';
+import { AuthRequest, JWTPayload } from '../types';
+
+// Simple APIError class for deployment
+class APIError extends Error {
+  statusCode: number;
+  code: string;
+  details: any;
+
+  constructor(message: string, statusCode: number = 500, code: string = 'INTERNAL_ERROR', details?: any) {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+    this.details = details;
+  }
+}
 
 export class AuthenticationError extends APIError {
   constructor(message = 'Authentication required') {
@@ -25,6 +39,12 @@ export class TokenExpiredError extends APIError {
     this.statusCode = 401;
     this.name = 'TokenExpiredError';
   }
+}
+
+// RefreshTokenPayload interface
+interface RefreshTokenPayload {
+  userId: string;
+  type: string;
 }
 
 // JWT Token generation

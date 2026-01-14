@@ -1,6 +1,26 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
-import { AuthRequest, ValidationError, APIError } from '../types';
+import { AuthRequest } from '../types';
+
+// Simple APIError class for deployment
+class APIError extends Error {
+  statusCode: number;
+  code: string;
+  details: any;
+
+  constructor(message: string, statusCode: number = 500, code: string = 'INTERNAL_ERROR', details?: any) {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+    this.details = details;
+  }
+}
+
+// ValidationError interface
+interface ValidationError {
+  field: string;
+  message: string;
+}
 
 export class ValidationError extends APIError {
   constructor(public validationErrors: ValidationError[]) {

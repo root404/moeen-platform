@@ -1,8 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
 import rateLimit from 'express-rate-limit';
 import environment from '../config/environment';
-import { AuthRequest, APIError } from '../types';
+import { AuthRequest } from '../types';
 import { query } from '../config/database';
+
+// Simple APIError class for deployment
+class APIError extends Error {
+  statusCode: number;
+  code: string;
+  details: any;
+
+  constructor(message: string, statusCode: number = 500, code: string = 'INTERNAL_ERROR', details?: any) {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+    this.details = details;
+  }
+}
 
 export class RateLimitError extends APIError {
   constructor(message = 'Rate limit exceeded') {
