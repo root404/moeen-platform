@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: moeen-frontend
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://moeen-api.onrender.com/api
+      - key: NODE_VERSION
+        value: 18
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /
+    autoDeploy: true
+    pullRequestPreviews:
+      enabled: true

@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // TODO: Implement i18n for App Router when needed
-  // i18n is not supported in App Router - need to use next-intl or similar
-  
   // React Strict Mode
   reactStrictMode: true,
   
@@ -19,6 +16,11 @@ const nextConfig = {
       },
     ],
     formats: ['image/webp', 'image/avif'],
+  },
+
+  // Environment variables for production
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://moeen-api.onrender.com/api',
   },
 
   // Security headers
@@ -43,6 +45,9 @@ const nextConfig = {
       },
     ];
   },
+
+  // Power by header removal
+  poweredByHeader: false,
 };
 
 export default nextConfig;
