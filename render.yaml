@@ -38,14 +38,14 @@ services:
         fromService:
           type: web
           name: moeen-api
-          property: url
+          property: host
       - key: NEXTAUTH_SECRET
         generateValue: true
       - key: NEXTAUTH_URL
         fromService:
           type: web
           name: moeen-frontend
-          property: url
+          property: host
 
 databases:
   # ---------------------------------------------------
