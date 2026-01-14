@@ -116,22 +116,29 @@ class Environment {
   private validateConfig(): void {
     const requiredFields = [
       'jwtSecret',
-      'jwtRefreshSecret',
-      'geminiApiKey',
       'sessionSecret',
     ];
 
-    const missingFields = requiredFields.filter(
+    const optionalFields = [
+      'jwtRefreshSecret',
+      'geminiApiKey',
+    ];
+
+    const missingRequired = requiredFields.filter(
       field => !this.config[field as keyof EnvironmentConfig]
     );
 
-    if (missingFields.length > 0) {
-      if (this.config.isProduction) {
-        throw new Error(`Missing required environment variables: ${missingFields.join(', ')}`);
-      } else {
-        console.warn(`Missing environment variables: ${missingFields.join(', ')}`);
-        console.warn('Please check your .env file');
-      }
+    const missingOptional = optionalFields.filter(
+      field => !this.config[field as keyof EnvironmentConfig]
+    );
+
+    if (missingRequired.length > 0) {
+      throw new Error(`Missing required environment variables: ${missingRequired.join(', ')}`);
+    }
+
+    if (missingOptional.length > 0) {
+      console.warn(`Missing optional environment variables: ${missingOptional.join(', ')}`);
+      console.warn('Application will run in limited mode');
     }
 
     // Validate numeric values
